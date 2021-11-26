@@ -29,7 +29,7 @@ class LandingPageView(CreateView):
      
             to_emails                   =[]
             to_emails.append(receipent)
-            text                        =str(request.POST.get('name'))+" from "+str(request.POST.get('industry_name'))+" has shown an interest. For details visit https://bimsnepal.com/list "
+            text                        =str(request.POST.get('name'))+" from "+str(request.POST.get('industry_name'))+" has shown an interest. For details visit https://xxxxxxxxxx "
             send_mail(to_emails,text)
             return self.form_valid(form)
         else:
