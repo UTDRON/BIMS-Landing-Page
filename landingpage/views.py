@@ -25,8 +25,8 @@ class LandingPageView(CreateView):
         if form.is_valid():
             if request.POST.get('otp') !=str(ContactAndOTP.objects.last().otp):
                 return self.form_invalid(form)
-            receipent                 ='sshyammaharjann@gmail.com'
-            # receipent                   ='pokharelprateik1993@gmail.com'
+            receipent                 ='XXXXXXXXXXXXXXXXXXXXx'
+     
             to_emails                   =[]
             to_emails.append(receipent)
             text                        =str(request.POST.get('name'))+" from "+str(request.POST.get('industry_name'))+" has shown an interest. For details visit https://bimsnepal.com/list "
@@ -45,7 +45,7 @@ def sms_otp(request):
 
     r                                 = requests.post(
             "http://api.sparrowsms.com/v2/sms/",
-            data                      ={'token' : 'v2_ZBpvMaibnDp48w2wfwhjerwddgP.X8z2',
+            data                      ={'token' : 'xxxxxxxxxxxxxxxxxxxxxxxxxxx',
                                       'from'  : 'InfoSMS',
                                       'to'    : contact_num,
                                       'text'  : var_otp})
