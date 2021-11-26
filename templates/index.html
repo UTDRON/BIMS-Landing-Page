@@ -1,0 +1,585 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<!--[if lt IE 9 ]><html class="no-js oldie" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+
+	<!--- basic page needs
+	================================================== -->
+	<meta charset="utf-8">
+	<title>BIMS Nepal</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- mobile specific metas
+	================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<!-- CSS
+	================================================== -->
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"> -->
+
+	{% comment %} favicons {% endcomment %}
+	<link rel="shortcut" icon href="{% static 'favicon.ico' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+	<style>
+		.home-image-right {
+			text-align: left;
+			top: 40%;
+			width: auto;
+		}
+		input[type="email"], input[type="number"], input[type="search"], 
+		input[type="text"], input[type="tel"], input[type="url"], 
+		input[type="password"], textarea, select {
+			background-color: beige;
+			height: 3em;
+		}
+		label {
+			color: white;
+			font-size: 18px;
+		}
+	</style>
+
+	{% comment %} script {% endcomment %}
+	<script src="{% static 'js/modernizr.js' %}"></script>
+	<script src="{% static 'js/pace.min.js' %}"></script>
+</head>
+
+
+<body id="top">
+
+  <!-- header ================================================== -->
+	<header id="header" class="row">
+		<div class="header-logo" style="background: transparent">
+			<a href="#">BIMS Nepal</a>
+		</div>
+		<nav id="header-nav-wrap">
+			<ul class="header-main-nav">
+				<li class="current"><a class="smoothscroll" href="#home" title="home">Home</a></li>
+				<li><a class="smoothscroll" href="#about" title="about">About</a></li>
+				<li><a class="smoothscroll" href="#pricing" title="pricing">Pricing</a></li>
+				{% comment %} <li><a class="smoothscroll" href="#testimonials" title="testimonials">Register</a></li> {% endcomment %}
+				<li><a class="smoothscroll" href="#download" title="download">Download</a></li>
+			</ul>
+			<!-- <a href="#" title="sign-up" class="button button-primary cta">Sign Up</a> -->
+		</nav>
+		<a class="header-menu-toggle" href="#"><span>Menu</span></a>
+	</header> <!-- /header -->
+
+
+  <!-- home ================================================== -->
+	<section id="home" data-parallax="scroll" data-image-src="static/images/Brick Industry.jpg" data-natural-width=3000 data-natural-height=2000>
+
+		<div class="overlay"></div>
+		<div class="home-content">
+			<div class="row contents">
+				<div class="home-content-left">
+					<h1 data-aos="fade-up">Welcome to Brick Industry Management System Nepal</h1>
+					<h1 data-aos="fade-up">We are Coming Soon! <br></h1>
+					<!-- <div class="buttons" data-aos="fade-up">
+							<a href="#download" class="smoothscroll button stroke">
+								<span class="icon-circle-down" aria-hidden="true"></span>
+								Download App
+							</a>
+							<a href="http://player.vimeo.com/video/14592941?title=0&amp;byline=0&amp;portrait=0&amp;color=39b54a" data-lity class="button stroke">
+								<span class="icon-play" aria-hidden="true"></span>
+								Watch Video
+							</a>
+						</div>                                          -->
+				</div>
+
+				{% comment %}
+					<div class="home-image-right">
+					<!-- <img src="static/images/brick3.jpg" srcset="static/images/brick3.jpg 1x, static/images/brick3.jpg 2x"
+						data-aos="fade-up"> -->
+					</div> 
+				{% endcomment %}
+				{% if messages %}
+					{% for message in messages %}
+						<div>{{ message }}</div>
+					{% endfor %}
+				{% endif %}
+				<div class="home-image-right">
+					<h1 style="color: white;">Contact US</h1>
+					<h3 style="color: white;">Please fill up the form below to Register.<br> We'll contact you as soon as possible.</h3>
+					<div>
+						<form class="form-inline" action="{% url 'landingpage:index' %}" method="POST" enctype="multipart/form-data" id="createForm">
+							{% csrf_token %}
+							<div class="md-auto">
+								<input type="text" name="{{form.name.html_name}}" placeholder="Enter Your Name">
+								{% if form.name.errors %}{{ form.name.errors }}{% endif %}
+							</div>
+							
+							<div class="form-group">
+								<input type="text" name="{{form.industry_name.html_name}}" placeholder="Enter Your Industry's Name">
+								{% if form.industry_name.errors %}{{ form.industry_name.errors }}{% endif %}
+							</div>
+							<div class="form-group">
+								<input type="text" name="{{form.email.html_name}}" placeholder="Enter Your Email">
+								{% if form.email.errors %}{{ form.email.errors }}{% endif %}
+							</div>
+							<div class="form-group">
+								<input type="text" name="{{form.address.html_name}}" placeholder="Address">
+								{% if form.address.errors %}{{ form.address.errors }}{% endif %}
+							</div>
+							<div class="form-group">
+								<input type="text" id="contact_no" name="{{form.contact_no.html_name}}" placeholder="Contact No.">
+								{% if form.contact_no.errors %}{{ form.contact_no.errors }}{% endif %}
+							</div>
+							<div class="form-group">
+								{% comment %} <a onclick="send_otp($(this))" font-width: 500% style="color: white ;"><strong>Send OTP</strong></a> {% endcomment %}
+								<label id="send_otp">Send OTP</label>
+								<div id="otp_msg" color="green" style="display:none;">A code has been sent to your phone number</div>
+								<input type="text" name="{{form.otp.html_name}}" placeholder="6 letter code">
+								{% if form.otp.errors %}{{ form.otp.errors }}{% endif %}
+
+							</div>
+							
+							<div class="col-eight text-center">
+								<button class="button button-secondary">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div> <!-- end home-content -->
+		
+
+
+		<!-- <ul class="home-social-list">
+				<li>
+					<a href="#"><i class="fa fa-facebook-square"></i></a>
+				</li>
+				<li>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+				</li>
+				<li>
+					<a href="#"><i class="fa fa-instagram"></i></a>
+				</li>
+				<li>
+					<a href="#"><i class="fa fa-youtube-play"></i></a>
+				</li>
+			</ul> -->
+		<!-- end home-social-list -->
+
+		<div class="home-scrolldown">
+			<a href="#about" class="scroll-icon smoothscroll">
+				<span>Scroll Down</span>
+				<i class="icon-arrow-right" aria-hidden="true"></i>
+			</a>
+		</div>
+	</section> <!-- end home -->
+
+
+  <!-- about ================================================== -->
+	<section id="about">
+		<div class="row about-intro">
+			<div class="col-four">
+				<h1 class="intro-header" data-aos="fade-up">About BIMS</h1>
+			</div>
+			<div class="col-eight">
+				<p class="lead" data-aos="fade-up">
+					An Intelligent Software To<br>
+					Manage and Track Production<br>
+					and Accounts in Your Brick Industry.
+				</p>
+			</div>
+		</div>
+
+		<div class="row about-features">
+			<div class="features-list block-1-3 block-m-1-2 block-mob-full group">
+				<div class="bgrid feature" data-aos="fade-up">
+					<span class="icon"><i class="icon-window"></i></span>
+					<div class="service-content">
+						<h3>Cloud Based</h3>
+						<p>A Cloud Based Platform designed to help you manage the workflow of brick industry from start to end.</p>
+					</div>
+				</div> <!-- /bgrid -->
+
+				<div class="bgrid feature" data-aos="fade-up">
+					<span class="icon"><i class="icon-image"></i></span>
+					<div class="service-content">
+						<h3>Workflow Automation</h3>
+						<p>Helps you to keep track of your resources, production/sales, workforce, transactions and many more.</p>
+					</div>
+				</div> <!-- /bgrid -->
+
+				<div class="bgrid feature" data-aos="fade-up">
+					<span class="icon"><i class="icon-paint-brush"></i></span>
+					<div class="service-content">
+						<h3>Security</h3>
+						<p>Low risk cloud based solution with enterprise-level cloud security.</p>
+					</div>
+				</div> <!-- /bgrid -->
+
+				<div class="bgrid feature" data-aos="fade-up">
+					<span class="icon"><i class="icon-file"></i></span>
+					<div class="service-content">
+						<h3>Mobile Friendly</h3>
+						<p>Mobile Devices Friendly.</p>
+					</div>
+				</div> <!-- /bgrid -->
+
+				<div class="bgrid feature" data-aos="fade-up">
+					<span class="icon"><i class="icon-sliders"></i></span>
+					<div class="service-content">
+						<h3>Easy To Customize</h3>
+						<p>Customizable and Scalable, with no high-end software or hardware requirements.</p>
+					</div>
+				</div> <!-- /bgrid -->
+
+				<div class="bgrid feature" data-aos="fade-up">
+					<span class="icon"><i class="icon-gift"></i></span>
+					<div class="service-content">
+						<h3>Free/Preemium Based</h3>
+						<p>Some modules are free of charges and some would cost you money.</p>
+					</div>
+				</div> <!-- /bgrid -->
+			</div> <!-- end features-list -->
+		</div> <!-- end about-features -->
+
+		<div class="row about-how">
+			<h1 class="intro-header" data-aos="fade-up">Why BIMS?</h1>
+			<div class="about-how-content" data-aos="fade-up">
+				<div class="about-how-steps block-1-2 block-tab-full group">
+					<div class="bgrid step" data-item="1">
+						<h3>Made in Nepal</h3>
+						<p>Designed according to Nepali Practices in Brick Industry.</p>
+					</div>
+					<div class="bgrid step" data-item="2">
+						<h3>Save Your Time</h3>
+						<p>Spend Very Less time on data entry.</p>
+					</div>
+					<div class="bgrid step" data-item="3">
+						<h3>Worry Less</h3>
+						<p>Validations and Automations are everywhere, so users have to worry less</p>
+					</div>
+					<div class="bgrid step" data-item="4">
+						<h3>Make Decisions</h3>
+						<p>Our Interactive dahboards, charts and graphs assist you in planning and making decisions</p>
+					</div>
+				</div>
+			</div> <!-- end about-how-content -->
+		</div> <!-- end about-how -->
+
+		<!-- <div class="about-bottom-image">
+
+			<img src="images/app-screens-1200.png" 
+				srcset="images/app-screens-600.png 600w, 
+						images/app-screens-1200.png 1200w, 
+						images/app-screens-2800.png 2800w" 
+				sizes="(max-width: 2800px) 100vw, 2800px"
+				alt="App Screenshots" data-aos="fade-up">
+
+		</div>  end about-bottom-image        -->
+
+	</section> <!-- end about -->
+
+
+  <!-- pricing  ================================================== -->
+	<section id="pricing">
+		<div class="row pricing-content">
+			<div class="col-four pricing-intro">
+				<h1 class="intro-header" data-aos="fade-up">Our Pricing Options</h1>
+				<p data-aos="fade-up">
+					BIMS Software has four options, some of the services are available for free, and for advance
+					features, you are subjected to yearly premium.
+				</p>
+			</div>
+
+			<div class="col-eight pricing-table">
+				<div class="row">
+					<div class="col-six plan-wrap">
+						<div class="plan-block" data-aos="fade-up">
+							<div class="plan-top-part">
+								<h3 class="plan-block-title">Operations-Free</h3>
+								<p class="plan-block-price"><sup></sup>FREE</p>
+								<!-- <p class="plan-block-per">Per Month</p> -->
+							</div>
+							<div class="plan-bottom-part">
+								<ul class="plan-block-features">
+									<li><span></span> Production Forms</li>
+									<li><span></span> Associated Resources</li>
+									<li><span></span> Simple Reports</li>
+									<!-- <li><span>30</span> Email Accounts</li> -->
+								</ul>
+								<!-- <a class="button button-primary large" href="">Get Started</a> -->
+							</div>
+						</div>
+					</div> <!-- end plan-wrap -->
+
+					
+					<div class="col-six plan-wrap">
+						<div class="plan-block primary" data-aos="fade-up">
+							<div class="plan-top-part">
+								<h3 class="plan-block-title">Operations-Paid</h3>
+								<p class="plan-block-price"><sup></sup>$$$</p>
+								<!-- <p class="plan-block-per">Per Year</p> -->
+							</div>
+							<div class="plan-bottom-part">
+								<ul class="plan-block-features">
+									<li><span></span> Production Forms</li>
+									<li><span></span> Associated Resources</li>
+									<li><span></span> Advanced Reports</li>
+									<!-- <li><span>70</span> Email Accounts</li> -->
+								</ul>
+								<!-- <a class="button button-primary large" href="">Get Started</a> -->
+							</div>
+						</div>
+					</div> <!-- end plan-wrap -->
+
+					<div class="col-six plan-wrap">
+						<div class="plan-block primary" data-aos="fade-up">
+							<div class="plan-top-part">
+								<h3 class="plan-block-title">Accounting</h3>
+								<p class="plan-block-price"><sup></sup>$$$</p>
+								<!-- <p class="plan-block-per">Per Year</p> -->
+							</div>
+							<div class="plan-bottom-part">
+								<ul class="plan-block-features">
+									<li><span></span> Accounting</li>
+									<li><span></span> Associated Resources</li>
+									<li><span></span> Reports</li>
+									<!-- <li><span>70</span> Email Accounts</li> -->
+								</ul>
+								<!-- <a class="button button-primary large" href="">Get Started</a> -->
+							</div>
+						</div>
+					</div> <!-- end plan-wrap -->
+
+					<div class="col-six plan-wrap">
+						<div class="plan-block" data-aos="fade-up">
+							<div class="plan-top-part">
+								<h3 class="plan-block-title">Accounting+Services</h3>
+								<p class="plan-block-price"><sup></sup>$$$</p>
+								<!-- <p class="plan-block-per">Per Month</p> -->
+							</div>
+							<div class="plan-bottom-part">
+								<ul class="plan-block-features">
+									<li><span></span> Accounting+ Services</li>
+									<li><span></span> Associated Resources</li>
+									<li><span></span> Reports</li>
+									<!-- <li><span>30</span> Email Accounts</li> -->
+								</ul>
+								<!-- <a class="button button-primary large" href="">Get Started</a> -->
+							</div>
+						</div>
+					</div> <!-- end plan-wrap -->
+					
+				</div>
+			</div> <!-- end pricing-table -->
+		</div> <!-- end pricing-content -->
+	</section> <!-- end pricing -->
+
+
+  <!-- Testimonials Section ================================================== -->
+	{% comment %} <section id="testimonials">
+		<div class="container">
+			<h1>Contact US</h1>
+			<h2>Please fill up the form below to Register. We'll contact you as soon as possible.</h2>
+			<form class="form-inline" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="md-auto">
+					<input type="text" name="name" placeholder="Enter Your Name">
+				</div>
+				<div class="form-group">
+					<input type="text" name="industry_name" placeholder="Enter Your Industry's Name">
+				</div>
+				<div class="form-group">
+					<input type="text" name="email" placeholder="Enter Your Email">
+				</div>
+				<div class="form-group">
+					<input type="text" name="address" placeholder="Address">
+				</div>
+				<div class="form-group">
+					<input type="text" name="contact_no" placeholder="Contact No.">
+				</div>
+				
+				<div class="col-eight text-center">
+					<button class="button button-secondary">Submit</button>
+				</div>
+			</form>
+			<a href="{% url 'landingpage:sms-otp' %}">Send Code</a>
+		</div>
+	</section> {% endcomment %}
+
+
+  <!-- download
+    ==================================================  -->
+	<section id="download">
+		<div class="row">
+			<div class="col-full">
+				<h1 class="intro-header" data-aos="fade-up">BIMS APP Coming Soon</h1>
+				<p class="lead" data-aos="fade-up">We are currently in development Phase. Please wait for announcement.</p>
+				<ul class="download-badges">
+					<li><a href="#" title="" class="badge-appstore" data-aos="fade-up">App Store</a></li>
+					<li><a href="#" title="" class="badge-googleplay" data-aos="fade-up">Play Store</a></li>
+				</ul>
+			</div>
+		</div>
+	</section> <!-- end download -->
+
+
+  <!-- footer
+    ================================================== -->
+	<footer>
+		<div class="footer-main">
+			<div class="row">
+				<div class="col-three md-1-3 tab-full footer-info">
+					<!-- <div class="footer-logo"></div> -->
+					<h4>BIMS Nepal</h4>
+					<p> If you need other services, find us at facebook, youtube and linkedin.
+					</p>
+					<ul class="footer-social-list">
+					<li>
+						<a href="https://www.facebook.com/calcgen/"><i class="fa fa-facebook-square"></i></a>
+					</li>
+					<li>
+						<a href="https://www.youtube.com/channel/UC4znNXPaTAHYxfukRVaFUow"><i class="fa fa-youtube-play"></i></a>
+					</li>
+					<li>
+						<a href="https://www.linkedin.com/authwall?trk=ripf&trkInfo=AQGiUEpb1U9zXQAAAXpSvtkIX_wVe3QBg02aJJvTOFNxm7mcSmJuPitOg9MJT6W9AkKg7RLlE0StFxkhpN8pk15qTO6BBuquIc4-1NqYaUFt48dQOAEup-F7IN83_-a8BoJHRHI=&originalReferer=https://calcgen.com/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2FCalcgen%2F"><i
+							class="fa fa-instagram"></i></a>
+					</li>
+					</ul>
+				</div> <!-- end footer-info -->
+
+			<div class="col-three md-1-3 tab-1-2 mob-full footer-contact">
+
+				<h4>Contact</h4>
+
+				<p>
+				Calcgen Solutions LLC <br>
+				2500 Wilcrest Dr # 300 Houston, TX 77042 <br>
+				Email: info@calcgen.com <br>
+				Phone: (832) 934 4140
+				</p>
+				<p>
+				Shyam Maharjan<br>
+				sshyammaharjann@gmail.com <br>
+				</p>
+
+			</div> <!-- end footer-contact -->
+
+			<div class="col-two md-1-3 tab-1-2 mob-full footer-site-links">
+
+				<h4>Site Links</h4>
+
+				<ul class="list-links">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">FAQ</a></li>
+				<li><a href="#">Terms</a></li>
+				<li><a href="#">Privacy Policy</a></li>
+				</ul>
+
+			</div> <!-- end footer-site-links -->
+
+			<div class="col-four md-1-2 tab-full footer-subscribe">
+
+				<h4>Our Newsletter</h4>
+
+				<p>We'll Publish it Soon.</p>
+
+				<div class="subscribe-form">
+
+				<form id="mc-form" class="group" novalidate="true">
+
+					<input type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="info@calcgen.com"
+					required="">
+
+					<!-- <input type="submit" name="subscribe" value="Send"> -->
+
+					<label for="mc-email" class="subscribe-message"></label>
+
+				</form>
+
+				</div>
+
+			</div> <!-- end footer-subscribe -->
+
+			</div> <!-- /row -->
+		</div> <!-- end footer-main -->
+
+
+	<div class="footer-bottom">
+
+		<div class="row">
+
+		<div class="col-twelve">
+			<div class="copyright">
+			<span>© Copyright BIMS 2021.</span>
+			<!-- <span>Design by <a href="http://www.styleshout.com/">styleshout</a></span>		         	 -->
+			</div>
+
+			<div id="go-top">
+			<a class="smoothscroll" title="Back to Top" href="#top"><i class="icon-arrow-up"></i></a>
+			</div>
+		</div>
+
+		</div> <!-- end footer-bottom -->
+
+	</div>
+
+	</footer>
+
+  <div id="preloader">
+    <div id="loader"></div>
+  </div>
+
+  <!-- Java Script
+    ================================================== -->
+  <script src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script src="{% static 'js/plugins.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+  {% comment %} <script>
+    function send_otp(record_data){
+        var send_otp = confirm("Send OTP? You'll be sent a 6 letter OTP for verification, on your phone");
+        if(send_otp){
+            $.ajax({
+                url:"{%url 'landingpage:sms-otp' %}",
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
+    }
+</script> {% endcomment %}
+<script>
+		$("#send_otp").click(function () {
+			let contact_no=$("#contact_no").val()
+			var send_otp = confirm("Send OTP? You'll be sent a 6 letter OTP for verification, on your phone");
+        	if(send_otp){
+				$.ajax({
+					url:`{%url 'landingpage:sms-otp' %}?contact_no=${contact_no}`,
+					success: function (data) {
+					
+						$("#send_otp").text("A code has been sent to your phone number");		
+						
+					}
+				});
+        	}
+			
+		});
+</script>
+
+</body>
+
+</html>
